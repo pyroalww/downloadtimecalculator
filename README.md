@@ -28,7 +28,7 @@ The Download Time Calculator is a simple web tool designed to help you estimate 
 
 ## Support
 
-If you encounter any issues or have questions regarding the Download Time Calculator, feel free to contact us at support@example.com for assistance.
+If you encounter any issues or have questions regarding the Download Time Calculator, feel free to contact us at lolpyro@proton.me for assistance.
 
 ## Acknowledgements
 

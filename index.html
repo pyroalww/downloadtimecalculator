@@ -1,0 +1,534 @@
+
+
+
+<!DOCTYPE html>
+<madebypyro>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</madebypyro>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Time Calculator</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .header h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    .header p {
+        font-size: 14px;
+        color: #666;
+    }
+    .main-content {
+        margin-bottom: 20px;
+    }
+    .input-group {
+        margin-bottom: 15px;
+        position: relative;
+    }
+    .input-group label {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    .input-group input[type="number"], .input-group select {
+        width: calc(70% - 40px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+    .input-group select {
+        width: 30%;
+    }
+    .input-group i {
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+        color: #888;
+        cursor: pointer;
+    }
+    .input-group button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    .input-group button:hover {
+        background-color: #0056b3;
+    }
+    .input-group input[type="number"]::-webkit-inner-spin-button,
+    .input-group input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .input-group input[type="number"]:invalid {
+        border-color: red;
+    }
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .button-group button {
+        width: 48%;
+        padding: 12px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        transition: background-color 0.3s;
+    }
+    .button-group button:hover {
+        background-color: #0056b3;
+    }
+    .result {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+        text-align: center;
+    }
+    .tooltip {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 1;
+    }
+    .input-group:hover .tooltip {
+        opacity: 1;
+    }
+    .tooltip::after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent #333 transparent;
+    }
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+    }
+    .toggle-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .toggle-label span {
+        font-size: 16px;
+        color: #333;
+    }
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 25px;
+    }
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 25px;
+        transition: .4s;
+    }
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 21px;
+        width: 21px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        border-radius: 50%;
+        transition: .4s;
+    }
+    input:checked + .toggle-slider {
+        background-color: #007bff;
+    }
+    input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        animation: modal-show 0.3s ease-out;
+    }
+    .modal-content iframe {
+        width: 100%;
+        height: 400px; /* Adjust height as needed */
+        border: none;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    @keyframes modal-show {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Download Time Calculator</h1>
+        <p>Calculate the estimated time required to download a file based on its size and your internet speed.</p>
+    </header>
+    <div class="main-content">
+        <div class="toggle-label">
+            <span>Realistic Measurement</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="realisticMeasurementToggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+        <div class="input-group">
+            <label for="fileSize">File Size:</label>
+            <input type="number" id="fileSize" min="0" step="0.01" placeholder="Enter file size">
+            <select id="fileSizeUnit">
+                <option value="MB">MB</option>
+                <option value="GB">GB</option>
+                <option value="TB">TB</option>
+                <option value="PB">PB</option>
+            </select>
+            <i class="fas fa-info-circle tooltip" title="Enter the file size in megabytes (MB), gigabytes (GB), terabytes (TB), or petabytes (PB)"></i>
+        </div>
+        <div class="input-group">
+            <label for="downloadSpeed">Download Speed:</label>
+            <input type="number" id="downloadSpeed" min="0" step="0.01" placeholder="Enter download speed">
+            <select id="downloadSpeedUnit">
+                <option value="Mbps">Mbps</option>
+                <option value="Kbps">Kbps</option>
+                <option value="GBit">GBit</option>
+            </select>
+            <i class="fas fa-info-circle tooltip" title="Enter the download speed in megabits per second (Mbps), kilobits per second (Kbps), or gigabits per second (GBit)"></i>
+        </div>
+        <div class="button-group">
+            <button id="calculateBtn" onclick="calculateDownloadTime()">Calculate</button>
+            <button id="measureBtn" onclick="openModal()">Speed Test</button>
+            <button id="resetBtn" onclick="resetForm()">Reset</button>
+        </div>
+        <div class="result" id="result"></div>
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+    <div id="speedTestModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe src="https://www.fast.com/" title="Speedtest"></iframe>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>Made by @pyroalww | Source code available on GitHub </p>
+    </footer>
+</div>
+
+<script>
+    function calculateDownloadTime() {
+        var realisticMeasurementEnabled = document.getElementById('realisticMeasurementToggle').checked;
+        var fileSize = parseFloat(document.getElementById('fileSize').value);
+        var downloadSpeed = parseFloat(document.getElementById('downloadSpeed').value);
+        var fileSizeUnit = document.getElementById('fileSizeUnit').value;
+        var downloadSpeedUnit = document.getElementById('downloadSpeedUnit').value;
+        var resultElement = document.getElementById('result');
+        var errorMessageElement = document.getElementById('errorMessage');
+
+
+        resultElement.textContent = '';
+        errorMessageElement.textContent = '';
+        if (isNaN(fileSize) || isNaN(downloadSpeed) || fileSize <= 0 || downloadSpeed <= 0) {
+            errorMessageElement.textContent = "Please enter valid values for file size and download speed.";
+            return;
+        }
+        var fileSizeInMB = convertToMB(fileSize, fileSizeUnit);
+        var downloadSpeedInMbps = convertToMbps(downloadSpeed, downloadSpeedUnit);
+        var downloadTimeSeconds = (fileSizeInMB * 8) / downloadSpeedInMbps;
+
+        if (realisticMeasurementEnabled) {
+            // Add random fluctuations to simulate realistic download speeds
+            var fluctuationFactor = 0.9 + Math.random() * 0.2; // Random fluctuation between 90% and 110%
+            downloadTimeSeconds *= fluctuationFactor;
+        }
+
+        var hours = Math.floor(downloadTimeSeconds / 3600);
+        var minutes = Math.floor((downloadTimeSeconds % 3600) / 60);
+        var seconds = Math.floor(downloadTimeSeconds % 60);
+
+
+        var resultText = "Download Time: ";
+        if (hours > 0) {
+            resultText += hours + " hour(s), ";
+        }
+        if (minutes > 0) {
+            resultText += minutes + " minute(s), ";
+        }
+        resultText += seconds + " second(s).";
+        resultElement.textContent = resultText;
+    }
+
+    function convertToMB(value, unit) {
+        switch (unit) {
+            case 'GB':
+                return value * 1024; // 1 GB = 1024 MB
+            case 'TB':
+                return value * 1024 * 1024; // 1 TB = 1024 GB
+            case 'PB':
+                return value * 1024 * 1024 * 1024; // 1 PB = 1024 TB
+            default:
+                return value; // Already in MB
+        }
+    }
+
+    function convertToMbps(value, unit) {
+        switch (unit) {
+            case 'Kbps':
+                return value / 1000; // Convert Kbps to Mbps
+            case 'GBit':
+                return value * 1000; // 1 GBit = 1000 Mbps
+            default:
+                return value;
+        }
+    }
+
+    function resetForm() {
+        document.getElementById("fileSize").value = "";
+        document.getElementById("downloadSpeed").value = "";
+        document.getElementById("fileSizeUnit").value = "MB";
+        document.getElementById("downloadSpeedUnit").value = "Mbps";
+        document.getElementById("result").textContent = "";
+        document.getElementById("errorMessage").textContent = "";
+    }
+
+    function openModal() {
+        document.getElementById('speedTestModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('speedTestModal').style.display = "none";
+    }
+</script>
+</body>
+</html>

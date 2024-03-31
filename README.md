@@ -37,8 +37,8 @@ If you encounter any issues or have questions regarding the Download Time Calcul
 
 ## About
 
-This web tool is developed and maintained by [Your Company Name]. 
+This web tool is developed and maintained by [@c4gwn]. 
 
-[Visit page](https://github.com/pyroalww/downloadtimecalculator)
+[Visit page](https://pyroalww.github.io/downloadtimecalculator)
 
 **Disclaimer:** The Download Time Calculator provides estimates based on the input provided. Actual download times may vary depending on various factors such as network congestion, server speed, and other external conditions.
